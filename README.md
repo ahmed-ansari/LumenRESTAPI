@@ -1,2 +1,2 @@
-# LumenRESTAPI
-Laravel Lumen Framework used for developing REST API
+# Lumen REST API
+Laravel Lumen Framework REST API
