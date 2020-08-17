@@ -9,7 +9,8 @@ class Complaint extends Model
     protected $table = "complaints";
     protected $primaryKey = "id";
     protected $fillable = [
-        'title', 'desc', 'image_path','category','user_id'
+        'title', 'desc', 'image_path','category','user_id','state','district','area',
+        'latitude','longitude','latitudeDelta','longitudeDelta'
     ];
 
     // protected $dates = ['started_at', 'published_at'];

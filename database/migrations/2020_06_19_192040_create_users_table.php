@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\Hash;
 
 class CreateUsersTable extends Migration
 {
@@ -35,8 +36,8 @@ class CreateUsersTable extends Migration
             [
                 'name' => 'ansari',
                 'mobile' => '9948604488',
-                'email' => 'toahmedshah@gmail.com',
-                'password' => 'secret'
+                'email' => 'ansari@live.com',
+                'password' => Hash::make('secret')
             ]
         ]);
 
@@ -45,7 +46,7 @@ class CreateUsersTable extends Migration
                 'name' => 'shabbir',
                 'mobile' => '123456',
                 'email' => 'creativewebdeals@gmail.com',
-                'password' => 'secret'
+                'password' => Hash::make('secret')
             ]
         ]);
     }

@@ -9,6 +9,19 @@ use DateTime;
 
 class ComplaintController extends Controller
 {
+
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
+    public function list() {
+        $data['status'] = 'Success';
+        $data['result'] = Complaint::all();
+        return response($data, 201)
+            ->header('Content-Type','application/json');
+    }
+
+
     public function create(Request $request)
     {
         $title = $request->input('title');
@@ -16,21 +29,40 @@ class ComplaintController extends Controller
         $category = $request->input('category');
 
         $image = $request->file('image');
+        // $image = $request->input('image');
 
+        $state = $request->input('state');
+        $district = $request->input('district');
+        $area = $request->input('area');
+
+        $latitude = $request->input('latitude');
+        $longitude = $request->input('longitude');
+        $latitudeDelta = $request->input('latitudeDelta');
+        $longitudeDelta = $request->input('longitudeDelta');
+
+        // echo 'hi';
+
+        // return [$image,$image->getClientOriginalName(), $request->all()];
+        // return [$title];
+        $userId = $request->input('userId');
+        
         // if(!$request->hasFile('image')) {
-        //     return response()->json(['upload_file_not_found'], 400);
-        // }
-        // $file = $request->file('image');
-        // if(!$file->isValid()) {
-        //     return response()->json(['invalid_file_upload'], 400);
-        // }
+            //     return response()->json(['upload_file_not_found'], 400);
+            // }
+            // $file = $request->file('image');
+            // if(!$file->isValid()) {
+                //     return response()->json(['invalid_file_upload'], 400);
+                // }
+                
+                // return var_dump($image);
+                // return [$image];
 
         if($image)
         {
             $file = $image->getClientOriginalName();
             $date = new DateTime();
             $filepath = $date->format('YmdHms').'__'.$file;
-            $destinationPath = public_path();
+            $destinationPath = storage_path();
             $status = $request->file('image')->move($destinationPath, $filepath);
         }
         else 
@@ -38,16 +70,56 @@ class ComplaintController extends Controller
             $filepath = '';
         }
 
-        
-        $complaint = Complaint::create([
+        $data = [
             'title' => $title,
             'category' => $category,
             'desc' => $desc,
             'image_path' => $filepath,
-            'user_id' => 1
-        ]);
+            'user_id' => $userId,
+            'state' => $state,
+            'district' => $district,
+            'area' => $area,
+            'latitude' => $latitude,
+            'longitude' => $longitude,
+            'latitudeDelta' => $latitudeDelta,
+            'longitudeDelta' => $longitudeDelta
+        ];
+        // $data2 = [
+        //     'title' => 'first complaint',
+        //     'category' => 'low',
+        //     'desc' => 'nothing more',
+        //     'image_path' => 'test path',
+        //     'user_id' => 1,
+        //     'state' => 'Telengana',
+        //     'district' => 'Hyderabad',
+        //     'area' => 'Kothi'
+        // ];
 
-        if($complaint) {
+        // area: "Guntur 1"
+        // category: "low"
+        // desc: "Russia’s"
+        // district: "Guntur"
+        // imagePath: "test path"
+        // latitude: 17.385
+        // latitudeDelta: 0.0009
+        // longitude: 78.4867
+        // longitudeDelta: 0.00041564039408866995
+        // state: "Andhra Pradesh"
+        // title: "from Mobile"
+        // userId: 1
+        // return  Complaint::create($data)->toSql();
+        // return $data;
+        // DB::enableQueryLog();
+
+
+        $complaint = Complaint::create($data);
+        // return $complaint;
+
+        // dd(DB::getQueryLog());
+
+        // return DB::getQueryLog();
+
+        if($complaint) {    
             return response()->json([
                 'success' => true,
                 'message' => 'Complaint created successfully',

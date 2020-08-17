@@ -18,9 +18,18 @@ class CreateComplaintsTable extends Migration
             $table->integer('user_id')->unsigned();
             // $table->integer('user_id')->unsigned()->unique();
             $table->string('title');
-            $table->string('image_path');
+            $table->string('image_path')->nullable();
             // $table->string('category');
             $table->enum('category', ['low', 'medium','high']);
+            
+            $table->string('state');
+            $table->string('district');
+            $table->string('area');
+
+            $table->double('latitude');
+            $table->double('longitude');
+            $table->double('latitudeDelta');
+            $table->double('longitudeDelta');
 
             $table->string('desc')->nullable();
             $table->boolean('record_deleted')->default(0);
@@ -41,21 +50,42 @@ class CreateComplaintsTable extends Migration
                 'category' => 'low',
                 'desc' => 'nothing more',
                 'image_path' => 'test path',
-                'user_id' => 1
+                'user_id' => 1,
+                'state' => 'Telengana',
+                'district' => 'Hyderabad',
+                'area' => 'Kothi',
+                'latitude' => 17.385,
+                'latitudeDelta' => 0.0009,
+                'longitude' => 78.4867,
+                'longitudeDelta' => 0.00041564039408866995
             ],
             [
                 'title' => 'Second complaint',
                 'category' => 'low',
                 'desc' => 'nothing more',
                 'image_path' => 'test path',
-                'user_id' => 1
+                'user_id' => 1,
+                'state' => 'Telengana',
+                'district' => 'Hyderabad',
+                'area' => 'MozamJahi Market',
+                'latitude' => 18.385,
+                'latitudeDelta' => 0.0009,
+                'longitude' => 78.4867,
+                'longitudeDelta' => 0.00041564039408866995
             ],
             [
                 'title' => 'third complaint',
                 'category' => 'low',
                 'desc' => 'nothing more',
                 'image_path' => 'test path',
-                'user_id' => 2
+                'user_id' => 2,
+                'state' => 'Telengana',
+                'district' => 'Hyderabad',
+                'area' => 'Afzal Gunj',
+                'latitude' => 18.385,
+                'latitudeDelta' => 0.0009,
+                'longitude' => 78.4867,
+                'longitudeDelta' => 0.00041564039408866995
             ]
         ]);
     }
