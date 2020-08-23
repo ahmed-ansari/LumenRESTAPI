@@ -14,9 +14,16 @@ class ComplaintController extends Controller
         $this->middleware('auth');
     }
 
-    public function list() {
+    public function list(Request $request) {
+
+        $userId = $request->input('userId');
+        // return [$userId];
         $data['status'] = 'Success';
-        $data['result'] = Complaint::all();
+        // $data['result'] = Complaint::all();
+        $data['result'] = Complaint::where('user_id', $userId)
+                        ->orderBy('id', 'desc')
+                        ->take(10)
+                        ->get();
         return response($data, 201)
             ->header('Content-Type','application/json');
     }
@@ -30,6 +37,7 @@ class ComplaintController extends Controller
 
         $image = $request->file('image');
         // $image = $request->input('image');
+        return [$title];
 
         $state = $request->input('state');
         $district = $request->input('district');
@@ -43,7 +51,6 @@ class ComplaintController extends Controller
         // echo 'hi';
 
         // return [$image,$image->getClientOriginalName(), $request->all()];
-        // return [$title];
         $userId = $request->input('userId');
         
         // if(!$request->hasFile('image')) {

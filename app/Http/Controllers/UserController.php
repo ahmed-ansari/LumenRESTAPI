@@ -36,7 +36,6 @@ class UserController extends Controller
     }
     public function show($id)
     {
-      
         // $data['result'] = User::find($id);
         // return response($data, 201)
         //     ->header('Content-Type','application/json');
