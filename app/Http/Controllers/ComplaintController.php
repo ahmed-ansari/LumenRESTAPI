@@ -37,7 +37,7 @@ class ComplaintController extends Controller
 
         $image = $request->file('image');
         // $image = $request->input('image');
-        return [$title];
+        // return [$title];
 
         $state = $request->input('state');
         $district = $request->input('district');
