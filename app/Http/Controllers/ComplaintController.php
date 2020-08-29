@@ -69,7 +69,7 @@ class ComplaintController extends Controller
             $file = $image->getClientOriginalName();
             $date = new DateTime();
             $filepath = $date->format('YmdHms').'__'.$file;
-            $destinationPath = storage_path();
+            $destinationPath = public_path();
             $status = $request->file('image')->move($destinationPath, $filepath);
         }
         else 
