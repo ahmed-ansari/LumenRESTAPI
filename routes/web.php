@@ -25,12 +25,13 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
 $router->get('/test', 'UserController@create');
 $router->get('/users', 'UserController@list');
+$router->get('/list', 'AuthController@list');
 $router->get('/user/{id}', 'UserController@show');
 
 $router->post('/complaint','ComplaintController@create');
 $router->post('/complaints','ComplaintController@list');
 
-$router->post('/register','AuthController@register');
+$router->post('/adduser','AuthController@register');
 $router->post('/login','AuthController@login');
 
 

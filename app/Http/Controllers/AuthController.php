@@ -21,6 +21,14 @@ class AuthController extends Controller
 
     }
 
+    public function list() {
+
+        $data['status'] = 'Success';
+        $data['result'] = User::all();
+        return response($data, 201)
+            ->header('Content-Type','application/json');
+    }
+
     public function register(Request $request) {
 
         $email = $request->input('email');

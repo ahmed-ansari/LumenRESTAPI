@@ -19,9 +19,8 @@ class ComplaintController extends Controller
         $userId = $request->input('userId');
         // return [$userId];
         $data['status'] = 'Success';
-        // $data['result'] = Complaint::all();
-        $data['result'] = Complaint::where('user_id', $userId)
-                        ->orderBy('id', 'desc')
+        // $data['result'] = Complaint::where('user_id', $userId)
+        $data['result'] = Complaint::orderBy('id', 'desc')
                         ->take(10)
                         ->get();
         return response($data, 201)
